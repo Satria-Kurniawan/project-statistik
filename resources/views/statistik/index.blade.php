@@ -6,7 +6,7 @@
 @section('container')
 
     <div class="float-right">
-        <a href="{{ route('export') }}" class="btn btn-outline-warning">Export</a>
+        <a href="{{ route('export') }}" class="btn btn-outline-success">Export</a>
         <a href="#" class="btn btn-outline-warning mr-4" data-toggle="modal" data-target="#exampleModalLong">Import</a>
     </div>
 
@@ -59,7 +59,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Import File</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -84,69 +84,104 @@
     </div>
   </div>
 
-
-<div class="container mt-1 bg-light">
-    <div class="row col-12">
-        <table class="table table-bordered">
-        <div class="col-12 container bg-primary text-light text-center">
-            <h4>TABEL NILAI</h4>
-        </div>
-        <thead>
-            <tr>
-            <th class="col-3">id</th>
-            {{-- <th class="col-6">Nama</th> --}}
-            <th class="col-3">Skor</th>
-            <th class="col-3">Opsi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($mahasiswa as $data)
-            <tr>
-                <td>{{ $data->id_mahasiswa }}</td>
-                {{-- <td>{{ $data->nama_mahasiswa }}</td> --}}
-                <td>{{ $data->nilai_mahasiswa }}</td>
-                <td>
-                <a href="/statistik/edit/{{ $data->id_mahasiswa }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                <a href="/statistik/delete/{{ $data->id_mahasiswa }}" class="btn btn-sm btn-outline-danger" id="delete">Delete</a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-        </table>
-    </div>
-
-    <div class="row col-12">
-        <table class="table table-bordered">
-            <div class="container bg-primary text-light text-center">
-                <h4>TABEL FREKUENSI</h4>
+<div class="row justify-content-center">
+    <div class="col-7">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <div class="col-12 container bg-primary text-light text-center p-1">
+                        <h4>TABEL NILAI</h4>
+                    </div>
+                <thead>
+                    <tr>
+                        <th class="col-2">id</th>
+                        {{-- <th class="col-6">Nama</th> --}}
+                        <th class="col-5">Skor</th>
+                        <th class="col-5">Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($mahasiswa as $data)
+                    <tr>
+                        <td>{{ $data->id_mahasiswa }}</td>
+                        {{-- <td>{{ $data->nama_mahasiswa }}</td> --}}
+                        <td>{{ $data->nilai_mahasiswa }}</td>
+                        <td>
+                            <a href="/statistik/edit/{{ $data->id_mahasiswa }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            {{-- <a href="/statistik/delete/{{ $data->id_mahasiswa }}" class="btn btn-sm btn-outline-danger" id="delete">Delete</a> --}}
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal{{ $data->id_mahasiswa }}">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+                </table>
             </div>
-            <thead>
-                <tr>
-                    <th class="col-6">Nilai</th>
-                    <th class="col-6">Frekuensi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($frekuensi as $nilai_mahasiswa)
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <div class="col-12 container bg-primary text-light text-center p-1">
+                        <h4>TABEL FREKUENSI</h4>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th class="col-6">Nilai</th>
+                            <th class="col-6">Frekuensi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($frekuensi as $nilai_mahasiswa)
 
-                <tr>
-                    <td> {{ $nilai_mahasiswa->nilai_mahasiswa }} </td>
-                    <td> {{ $nilai_mahasiswa->frekuensi }}</td>
-                </tr>
+                        <tr>
+                            <td> {{ $nilai_mahasiswa->nilai_mahasiswa }} </td>
+                            <td> {{ $nilai_mahasiswa->frekuensi }}</td>
+                        </tr>
 
-                @endforeach
-                <tr>
-                <th>Total frekuensi :</th>
-                <td> {{ $totalfrekuensi }}</td>
-                </tr>
-                <tr>
-                <th>Total nilai :</td>
-                <td> {{ $totalskor }}</td>
-                </tr>
-            </tbody>
-        </table>
+                        @endforeach
+                        <tr>
+                        <th>Total frekuensi :</th>
+                        <td> {{ $totalfrekuensi }}</td>
+                        </tr>
+                        <tr>
+                        <th>Total nilai :</td>
+                        <td> {{ $totalskor }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+@foreach ($mahasiswa as $data)
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal{{ $data->id_mahasiswa }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Id {{$data->id_mahasiswa}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Yakin mau ngapus?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <a href="/statistik/delete/{{ $data->id_mahasiswa }}">
+                        <button type="button" class="btn btn-success">Yes</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 
 @endsection
 

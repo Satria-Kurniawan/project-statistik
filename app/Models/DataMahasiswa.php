@@ -36,4 +36,10 @@ class DataMahasiswa extends Model
         ->where('id_mahasiswa',$id_mahasiswa)
         ->update($data);
     }
+
+    public function deleteData($id_mahasiswa){
+        DB::table('tabel_mahasiswa')
+        ->where('id_mahasiswa', $id_mahasiswa)
+        ->delete();
+    }
 }

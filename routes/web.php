@@ -35,3 +35,7 @@ Route::get('/statistik/delete/{id_mahasiswa}', 'App\Http\Controllers\StatistikCo
 
 Route::get('/statistik/export', 'App\Http\Controllers\StatistikController@mahasiswaExport')->name('export');
 Route::post('/statistik/import', 'App\Http\Controllers\StatistikController@mahasiswaImport')->name('import');
+
+Route::get('statistik/databergolong', 'App\Http\Controllers\StatistikController@dataBergolong');
+Route::get('statistik/chi-kuadrat', 'App\Http\Controllers\StatistikController@chiKuadrat');
+Route::get('statistik/lilliefors', 'App\Http\Controllers\StatistikController@lilliefors');

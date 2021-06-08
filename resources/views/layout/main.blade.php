@@ -117,7 +117,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-      <img src="img/LogoSat.png"  class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="/img/LogoSat.png"  class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">SatriaWeb</span>
     </a>
 
@@ -165,6 +165,34 @@
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Statistik
+                <i class="fas"></i>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url('/statistik/databergolong')}}" class="nav-link ">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Data Bergolong
+                <i class="fas"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('/statistik/chi-kuadrat')}}" class="nav-link ">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Normalitas Chi-Kuadrat
+                <i class="fas"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('/statistik/lilliefors')}}" class="nav-link ">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Normalitas Lilliefors
                 <i class="fas"></i>
               </p>
             </a>
